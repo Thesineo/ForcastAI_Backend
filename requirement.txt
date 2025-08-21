@@ -10,9 +10,5 @@ requests>=2.32
 python-dotenv>=1.0
 yfinance
 scikit-learn
-redis 
-logging
-timing
-pickle
-base64
+redis
 vaderSentiment
