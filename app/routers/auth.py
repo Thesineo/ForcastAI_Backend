@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from app.db import get_db
+from app.db.db import engine 
 from app.models.user import User
 from app.schemas.user import UserCreate, UserLogin, UserOut
 from passlib.context import CryptContext
