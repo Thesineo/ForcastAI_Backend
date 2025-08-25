@@ -9,3 +9,12 @@ engine = create_engine(
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
+
+def get_db():
+    if SessionLocal is None:
+        raise RuntimeError("DATABASE_URL not configured")
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()

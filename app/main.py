@@ -1,29 +1,28 @@
 from fastapi import FastAPI
-from app.routers import analyze, chat, auth
-from app.db.db import engine, Base 
 from fastapi.middleware.cors import CORSMiddleware
+from app.db.db import Base, engine
+from app.routers import chat as chat_router
+from app.routers import auth as auth_router
 
+app = FastAPI()
 
-app = FastAPI(title= "Predective AI", version="1.0")
-
+# CORS (adjust for your frontend URL)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],  # or ["http://localhost:5173"] if using Vite
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173", "https://your-frontend.onrender.com"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# Create tables
+if engine is not None:
+    Base.metadata.create_all(bind=engine)
 
+# Routers
+app.include_router(chat_router.router, prefix="/api")
+app.include_router(auth_router.router)  # already prefixed with /api/auth
 
-app.include_router(chat.router, prefix="/v1", tags=["chat"])
-app.include_router(analyze.router, prefix="/v1", tags=["analyze"])
-app.include_router(auth.router, prefix="/v1", tags=["auth"])
 @app.get("/health")
 def health():
     return {"ok": True}
-Base.metadata.create_all(bind=engine)
-
-
-
-

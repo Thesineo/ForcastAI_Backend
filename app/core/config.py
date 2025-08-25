@@ -9,9 +9,11 @@ class Settings(BaseSettings):
     ""
     
     # Other existing settings...
-    REDIS_URL: str = "redis://localhost:6379/0"
-    DATABASE_URL: str = "postgresql://user:password@localhost:5432/"
-    
+    DATABASE_URL: str | None = None
+    REDIS_URL: str | None = None
+    JWT_SECRET: str = "change-me"  # default; overridden by env in prod
+    JWT_ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24  # 1 day
     class Config:
         env_file = ".env"
 
