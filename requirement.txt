@@ -14,3 +14,4 @@ redis
 vaderSentiment
 passlib[bcrypt]
 python-jose
+email-validator
