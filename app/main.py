@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routers import analyze, chat
+from app.routers import analyze, chat, auth
 from app.db.db import engine, Base 
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -17,8 +17,8 @@ app.add_middleware(
 
 
 app.include_router(chat.router, prefix="/v1", tags=["chat"])
-
-
+app.include_router(analyze.router, prefix="/v1", tags=["analyze"])
+app.include_router(auth.router, prefix="/v1", tags=["auth"])
 @app.get("/health")
 def health():
     return {"ok": True}
