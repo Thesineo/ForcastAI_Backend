@@ -10,7 +10,8 @@ import jwt  # PyJWT
 from app.core.config import settings
 from app.db.db import get_db
 from app.models.user import User
-from app.schemas.user import UserCreate, UserLogin, UserOut
+from app.schemas.user import UserCreate, UserLogin, UserOut, UserProfile, UserUpdate
+
 
 router = APIRouter(prefix="/api/auth", tags=["Auth"])
 
