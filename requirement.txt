@@ -16,7 +16,7 @@ passlib[bcrypt]
 python-jose
 email-validator
 PyJWT
-tensorflow==2.16.0
+tensorflow==2.20.0
 textblob
 prophet
 xgboost
